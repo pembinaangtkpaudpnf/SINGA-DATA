@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><title>SINGA-DATA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{--n:#0b2559;--n2:#1b3d86;--g:#e9a23b;--m:#5b6475;--t:#1f2937;--bd:#e3e8f2}
+*{box-sizing:border-box}body{margin:0;font:14px/1.5 system-ui,Arial,sans-serif;background:#f3f5fa;color:var(--t)}
+aside{position:fixed;inset:0 auto 0 0;width:250px;background:linear-gradient(180deg,var(--n),var(--n2));color:#fff;display:flex;flex-direction:column;z-index:20;transition:transform .25s}
+.brand{padding:24px 22px 18px;border-bottom:1px solid rgba(255,255,255,.12)}.brand b{font-size:22px;letter-spacing:.5px}.brand b::after{content:"";display:block;width:34px;height:3px;background:var(--g);margin-top:6px}.brand small{display:block;opacity:.75;margin-top:8px}
+nav{padding:14px 12px;flex:1}nav button{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:0;background:none;color:#dbe4f7;padding:12px 14px;margin-bottom:4px;border-radius:10px;font:inherit;cursor:pointer}
+nav button i{font-style:normal;font-size:18px;width:24px}nav button:hover{background:rgba(255,255,255,.09)}nav button.on{background:#fff;color:var(--n);font-weight:700;box-shadow:inset 4px 0 0 var(--g)}
+.foot{padding:16px 18px;border-top:1px solid rgba(255,255,255,.12);font-size:12px;color:#c9d6f2}
+.tg{display:flex;gap:10px;align-items:center;cursor:pointer;margin-bottom:10px}.tg input{display:none}.tg span{flex:none;width:36px;height:20px;border-radius:20px;background:#ffffff44;position:relative;transition:.2s}
+.tg span::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.2s}.tg input:checked+span{background:var(--g)}.tg input:checked+span::after{left:18px}
+.wrap{margin-left:250px;min-height:100vh}.top{display:flex;align-items:center;gap:14px;padding:22px 32px 6px}.top h2{margin:0;font-size:24px;color:var(--n)}.top p{margin:2px 0 0;color:var(--m)}
+#mb{display:none;border:0;background:var(--n);color:#fff;border-radius:8px;font-size:20px;padding:6px 12px;cursor:pointer}#ov{display:none}
+main{padding:16px 32px 40px}.v{display:none}.v.on{display:block}
+.card{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:18px;box-shadow:0 2px 8px rgba(20,40,90,.05)}
+.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-bottom:16px}
+.kc{border-left:5px solid var(--n)}.kc span{color:var(--m);font-size:13px}.kc b{display:block;font-size:34px;color:var(--n);line-height:1.2}
+.g2{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:16px}.cw{position:relative;height:360px}.cw h4,.card h4{margin:0 0 10px;color:var(--n)}
+.fb{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-bottom:16px}.fg{display:flex;flex-direction:column;gap:4px;flex:1;min-width:190px;max-width:280px}.fg label{font-size:12px;font-weight:600;color:var(--m)}
+.fb input,.fb select{padding:10px 12px;border:1px solid #cfd7e6;border-radius:8px;font:inherit;background:#fff}.fb input:focus,.fb select:focus{outline:2px solid #9db8f2;border-color:#4a76d8}
+.rs{padding:10px 16px;border:1px solid var(--n);color:var(--n);background:#fff;border-radius:8px;cursor:pointer;font:inherit}.rs:hover{background:var(--n);color:#fff}
+.th{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.th span{color:var(--m)}
+.tw{overflow:auto;max-height:72vh;border:1px solid var(--bd);border-radius:10px}table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{padding:10px 12px;border-bottom:1px solid #eef1f7;text-align:left;white-space:nowrap}th{position:sticky;top:0;background:#eaf0fb;color:var(--n);z-index:1}tbody tr:nth-child(even){background:#fafbfe}tbody tr:hover{background:#eef4ff}
+.pill{background:#fff3e0;color:#b45309;border-radius:20px;padding:3px 10px;font-weight:600;font-size:12.5px}
+.pg{display:flex;gap:10px;align-items:center;justify-content:flex-end;margin-top:12px;color:var(--m)}.pg button,.pg select{padding:7px 14px;border:1px solid #cfd7e6;background:#fff;border-radius:8px;cursor:pointer;font:inherit}.pg button:disabled{opacity:.4;cursor:default}
+.hm th,.hm td{text-align:center}.hm td:first-child,.hm th:first-child{text-align:left}
+.hero{border-radius:16px;padding:44px;color:#fff;margin-bottom:20px;background:linear-gradient(135deg,var(--n),#6a56c4 60%,#b0464a)}.hero h1{margin:0;font-size:clamp(34px,5vw,60px)}.hero p{font-size:17px;margin:8px 0 0}
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.tile{text-align:left;cursor:pointer;font:inherit;transition:.15s}.tile:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(20,40,90,.12)}
+.tile i{font-style:normal;font-size:28px}.tile b{display:block;font-size:34px;color:var(--n)}.tile strong{display:block}.tile span{color:var(--m);font-size:13px}.note{margin-top:20px;color:var(--m)}
+@media(max-width:900px){aside{transform:translateX(-100%)}aside.open{transform:none}.wrap{margin-left:0}#mb{display:block}#ov.open{display:block;position:fixed;inset:0;background:#0006;z-index:15}.g2{grid-template-columns:1fr}main,.top{padding-left:16px;padding-right:16px}.hero{padding:28px}}
+body.auth aside,body.auth .wrap{display:none}#lg{display:none;min-height:100vh;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#0b2559,#6a56c4 60%,#b0464a)}body.auth #lg{display:flex}
+.lc{width:100%;max-width:400px;padding:30px}.lc .lb b{font-size:26px;color:var(--n);display:block}.lc .lb small{color:var(--m)}.lc h3{margin:22px 0 10px;color:var(--n)}.lc label{display:block;font-size:12px;font-weight:600;color:var(--m);margin:12px 0 4px}
+.lc input{width:100%;padding:11px 12px;border:1px solid #cfd7e6;border-radius:8px;font:inherit}.pw{position:relative}.pw button{position:absolute;right:6px;top:4px;border:0;background:none;font-size:18px;cursor:pointer}
+.lbtn{width:100%;margin:18px 0 12px;padding:12px;border:0;border-radius:8px;background:var(--n);color:#fff;font:inherit;font-weight:700;cursor:pointer}.lbtn:disabled{opacity:.6}.le{color:#b42318;min-height:18px;margin:0;font-size:13px}
+.usr{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}.usr button{border:1px solid #ffffff66;background:none;color:#fff;border-radius:8px;padding:6px 10px;cursor:pointer}
+</style></head><body class="auth">
+<div id="lg"><form id="lf" class="card lc"><div class="lb"><b>SINGA-DATA</b><small>Sistem Integrasi Analisis Data Tata Kelola Kepala Sekolah</small></div><h3>Masuk</h3><p id="le" class="le"></p><label for="lu">Nama pengguna</label><input id="lu" autocomplete="username" required><label for="lp">Kata sandi</label><div class="pw"><input id="lp" type="password" autocomplete="current-password" required><button type="button" id="ls" title="Tampilkan/sembunyikan">👁</button></div><button id="lb" class="lbtn">Masuk</button><small>Hubungi operator apabila lupa kata sandi atau belum memiliki akun.</small></form></div>
+<aside id="sb"><div class="brand"><b>SINGA-DATA</b><small>Sistem Integrasi Analisis Data Tata Kelola Kepala Sekolah</small></div>
+<nav><button data-v="home" class="on"><i>🏠</i>Beranda</button><button data-v="ks"><i>👤</i>KS Aktif</button><button data-v="keb"><i>🏫</i>Kebutuhan KS</button><button data-v="pen"><i>⏳</i>Proyeksi KS Pensiun</button><button data-v="bcks"><i>🎓</i>BCKS (Guru Memenuhi Syarat)</button></nav>
+<div class="foot"><div class="usr"><div><b id="un"></b><br><small id="ur"></small></div><button id="lo">Keluar</button></div><label class="tg"><input type="checkbox" id="sw"><span></span>Tampilkan NIP, tanggal lahir &amp; nomor HP</label><div id="upd">Disdikpora Kabupaten Buleleng</div></div></aside><div id="ov"></div>
+<div class="wrap"><div class="top"><button id="mb">☰</button><div><h2 id="ttl"></h2><p id="sub"></p></div></div>
+<main><div id="msg" class="card">Memuat data…</div><section id="home" class="v on"></section><section id="ks" class="v"></section><section id="keb" class="v"></section><section id="pen" class="v"></section><section id="bcks" class="v"></section></main></div>
+<script>
+/* GANTI dengan URL Web App (berakhiran /exec) dari Deploy > Manage deployments */
+const API_URL='PASTE_URL_EXEC_DI_SINI';
+const api=(action,p)=>fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(Object.assign({action},p||{}))}).then(r=>r.json());
+
+const $=s=>document.querySelector(s),K=n=>String(n).toLowerCase().replace(/[^a-z0-9]/g,'');
+const COL={SD:'#4285F4',SMP:'#F4A04D',TK:'#A97CE8'};let D,SHOW=false,CH={},cur='home',done={};
+const T={home:['Beranda','Ringkasan data tata kelola Kepala Sekolah'],ks:['Data Kepala Sekolah Negeri Aktif','Sebaran, masa penugasan, dan status periode penugasan'],keb:['Data Kebutuhan Kepala Sekolah','Sekolah yang masih dipimpin Pelaksana Tugas (PLT)'],pen:['Proyeksi Kepala Sekolah Pensiun','Perkiraan pensiun per kecamatan dan tahun'],bcks:['Bakal Calon Kepala Sekolah (BCKS)','Guru yang memenuhi syarat sebagai calon Kepala Sekolah']};
+const g=(r,...c)=>{for(const x of c){const v=r[K(x)];if(v&&v!=='#N/A')return v}return''};
+const dt=s=>/^\d{4}-\d\d-\d\d$/.test(s)?s.split('-').reverse().join('-'):s;
+const iso=s=>{let m=s.match(/^\d{4}-\d\d-\d\d/);if(m)return m[0];m=s.match(/(\d{1,2})[-\/](\d{1,2})[-\/](\d{4})/);if(m)return m[3]+'-'+m[2].padStart(2,'0')+'-'+m[1].padStart(2,'0');m=s.match(/(\d{1,2})-(\d{4})/);return m?m[2]+'-'+m[1].padStart(2,'0')+'-01':''};
+const kec=r=>g(r,'kecamatan_sekolah','kecamatan','lokasi_sekolah').split(',')[0].trim().toUpperCase(),jen=r=>g(r,'jenjang').toUpperCase();
+const uniq=a=>[...new Set(a.filter(Boolean))].sort(),esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const PDT=r=>g(r,'tanggal_pensiun','tmt_pensiun','tahun_pensiun'),M0=()=>new Date().toISOString().slice(0,8)+'01';
+const COLS={
+ks:[['Nama',['nama_lengkap']],['NIP',['nip'],'s'],['Usia',['usia']],['Gol',['gol','golongan']],['Sekolah',['nama_sekolah']],['Kecamatan',['kecamatan_sekolah']],['TMT Pertama',['tmtpertama','tmt_pertama'],'d'],['Masa Penugasan',['masapenugasan']],['Akhir Periode',['akhirperiode','tanggalakhirperiode','tanggalakhir','tanggal'],'d'],['Status',['statusmasapenugasan'],'w'],['No. HP',['nomor_hp'],'s']],
+keb:[['Nama Sekolah',['nama_sekolah']],['Nama Kepala Sekolah',['nama_kepala_sekolah','nama_lengkap']],['Jenjang',['jenjang']],['Status KS',['status_ks','status']],['Lokasi Sekolah',['lokasi_sekolah','kecamatan_sekolah']]],
+pen:[['Nama',['nama_lengkap']],['NIP',['nip'],'s'],['Jenjang',['jenjang']],['Sekolah',['nama_sekolah']],['Kecamatan',['kecamatan_sekolah']],['Tanggal Pensiun',['tanggal_pensiun','tmt_pensiun'],'d']],
+bcks:[['Nama',['nama_lengkap']],['NIP',['nip'],'s'],['Usia',['usia']],['Gol',['gol','golongan']],['Kualifikasi',['kualifikasi']],['Sekolah',['nama_sekolah']],['Jenjang',['jenjang']],['Status',['status_kepegawaian']],['Tanggal Lahir',['tanggal_lahir'],'sd'],['Jabatan',['jabatan']],['No. HP',['nomor_hp'],'s']]};
+function chart(k,cv,type,data,o){CH[k]&&CH[k].destroy();CH[k]=new Chart(cv,{type,data,options:Object.assign({responsive:true,maintainAspectRatio:false},o||{})})}
+function grp(R){const m={};R.forEach(r=>{const k=kec(r)||'-',j=jen(r)||'-';(m[k]=m[k]||{})[j]=(m[k][j]||0)+1});const t=o=>Object.values(o).reduce((a,b)=>a+b,0);const L=Object.keys(m).sort((a,b)=>t(m[b])-t(m[a]));return{L,ds:uniq(R.map(jen)).map(j=>({label:j,data:L.map(k=>m[k][j]||0),backgroundColor:COL[j]||'#9aa0a6'}))}}
+function charts(label,h){return(R,box,id)=>{const G=grp(R),J=uniq(R.map(jen));
+box.innerHTML=`<div class="kp"><div class="card kc"><span>${label}</span><b>${R.length}</b></div>${J.map(j=>`<div class="card kc" style="border-color:${COL[j]||'#9aa0a6'}"><span>Jenjang ${j}</span><b>${R.filter(r=>jen(r)===j).length}</b></div>`).join('')}</div><div class="g2"><div class="card"><h4>Sebaran per Kecamatan</h4><div class="cw"><canvas></canvas></div></div><div class="card"><h4>Komposisi Jenjang</h4><div class="cw"><canvas></canvas></div></div></div>`;
+const cv=box.querySelectorAll('canvas');
+chart(id+'a',cv[0],'bar',{labels:G.L,datasets:G.ds},{indexAxis:h?'y':'x',plugins:{legend:{position:'bottom'}}});
+chart(id+'b',cv[1],'doughnut',{labels:J,datasets:[{data:J.map(j=>R.filter(r=>jen(r)===j).length),backgroundColor:J.map(j=>COL[j]||'#9aa0a6')}]},{plugins:{legend:{position:'bottom'}}})}}
+function heat(R,box){const y0=new Date().getFullYear(),Y=[...Array(8)].map((_,i)=>y0+i),m={};
+R.forEach(r=>{const y=+((PDT(r).match(/\d{4}/)||[])[0]);if(y>=y0&&y<y0+8){const k=kec(r)||'-';(m[k]=m[k]||{})[y]=(m[k][y]||0)+1}});
+const L=Object.keys(m).sort(),mx=Math.max(1,...L.flatMap(k=>Object.values(m[k]))),tot=Y.map(y=>L.reduce((a,k)=>a+(m[k][y]||0),0)),all=tot.reduce((a,b)=>a+b,0);
+box.innerHTML=`<div class="kp"><div class="card kc"><span>KS pensiun ${y0}–${y0+7}</span><b>${all}</b></div><div class="card kc"><span>Puncak tahun</span><b>${all?Y[tot.indexOf(Math.max(...tot))]:'-'}</b></div></div><div class="card" style="margin-bottom:16px;overflow:auto"><h4>Peta Panas Pensiun per Kecamatan</h4><table class="hm"><tr><th>Kecamatan</th>`+Y.map(y=>'<th>'+y+'</th>').join('')+'<th>Total</th></tr>'+L.map(k=>'<tr><td>'+esc(k)+'</td>'+Y.map(y=>{const v=m[k][y]||0;return'<td style="background:rgba(232,90,40,'+(v?(.1+.8*v/mx).toFixed(2):0)+')">'+(v||'-')+'</td>'}).join('')+'<td><b>'+Y.reduce((a,y)=>a+(m[k][y]||0),0)+'</b></td></tr>').join('')+'<tr><th>Grand total</th>'+tot.map(v=>'<th>'+v+'</th>').join('')+'<th>'+all+'</th></tr></table></div>'}
+function mount(id,rows,cols,fl,extra){const el=$('#'+id);let p=0,n=100,f=fl.map(x=>x.d||''),ctr=[];
+el.innerHTML='<div class="card fb"></div><div class="ex"></div><div class="card"><div class="th"><h4 style="margin:0">Daftar Data</h4><span></span></div><div class="tw"></div><div class="pg"></div></div>';
+const bar=el.querySelector('.fb');
+fl.forEach((x,i)=>{let e;if(x.t==='s'){e=document.createElement('select');e.innerHTML='<option value="">Semua</option>'+uniq(rows.map(x.f)).map(v=>'<option>'+esc(v)+'</option>').join('');e.value=x.d||''}else{e=document.createElement('input');e.placeholder='Ketik untuk mencari…'}
+e.oninput=e.onchange=()=>{f[i]=e.value;p=0;draw()};ctr.push(e);const w=document.createElement('div');w.className='fg';w.innerHTML='<label>'+x.l+'</label>';w.appendChild(e);bar.appendChild(w)});
+const rs=document.createElement('button');rs.className='rs';rs.textContent='Reset filter';rs.onclick=()=>{fl.forEach((x,i)=>{f[i]=x.d||'';ctr[i].value=x.d||''});p=0;draw()};bar.appendChild(rs);
+const draw=el._draw=()=>{const R=rows.filter(r=>fl.every((x,i)=>!f[i]||(x.t==='s'?x.f(r)===f[i]:x.f(r).toLowerCase().includes(f[i].toLowerCase()))));
+extra&&extra(R,el.querySelector('.ex'),id);
+const C=cols.filter(c=>SHOW||!(c[2]||'').includes('s')),pages=Math.max(1,Math.ceil(R.length/n));p=Math.min(p,pages-1);
+el.querySelector('.th span').textContent=R.length+' data';
+el.querySelector('.tw').innerHTML='<table><thead><tr><th>No</th>'+C.map(c=>'<th>'+c[0]+'</th>').join('')+'</tr></thead><tbody>'+(R.length?R.slice(p*n,p*n+n).map((r,i)=>'<tr><td>'+(p*n+i+1)+'</td>'+C.map(c=>{let v=g(r,...c[1]);const q=c[2]||'';if(q.includes('d'))v=dt(v);return'<td>'+(q.includes('w')&&v?'<span class="pill">⚠️ '+esc(v)+'</span>':esc(v))+'</td>'}).join('')+'</tr>').join(''):'<tr><td colspan="'+(C.length+1)+'" style="text-align:center;padding:30px;color:#5b6475">Tidak ada data yang cocok dengan filter.</td></tr>')+'</tbody></table>';
+const pg=el.querySelector('.pg');pg.innerHTML=`<span>Baris per halaman</span><select>${[25,50,100,200].map(v=>`<option${v==n?' selected':''}>${v}</option>`).join('')}</select><button ${p?'':'disabled'}>‹ Sebelumnya</button><span>${R.length?p*n+1:0}–${Math.min(R.length,p*n+n)} dari ${R.length}</span><button ${p<pages-1?'':'disabled'}>Berikutnya ›</button>`;
+const b=pg.querySelectorAll('button');pg.querySelector('select').onchange=e=>{n=+e.target.value;p=0;draw()};b[0].onclick=()=>{p--;draw()};b[1].onclick=()=>{p++;draw()}};draw()}
+const V={
+home(){const A=D.data,m0=M0(),tl=[['ks','👤',A.ksAktif.length,'KS Aktif','Kepala Sekolah negeri yang sedang menjabat'],['keb','🏫',A.kebutuhan.length,'Kebutuhan KS','Sekolah yang dipimpin PLT'],['pen','⏳',A.ksAktif.filter(r=>iso(PDT(r))>=m0).length,'Proyeksi KS Pensiun','Kepala Sekolah dengan jadwal pensiun'],['bcks','🎓',A.bcks.length,'BCKS','Guru yang memenuhi syarat']];
+$('#home').innerHTML=`<div class="hero"><h1>${esc(D.config.title)}</h1><p>Sistem Integrasi Analisis Data Tata Kelola Kepala Sekolah</p></div><div class="tl">${tl.map(t=>`<button class="card tile" data-v="${t[0]}"><i>${t[1]}</i><b>${t[2]}</b><strong>${t[3]}</strong><span>${t[4]}</span></button>`).join('')}</div><p class="note">ℹ️ ${esc(D.config.note)}</p>`},
+ks(){mount('ks',D.data.ksAktif,COLS.ks,[{l:'Nama sekolah',f:r=>g(r,'nama_sekolah')},{l:'Nama lengkap',f:r=>g(r,'nama_lengkap')},{l:'Kecamatan',t:'s',f:kec},{l:'Jenjang',t:'s',f:jen},{l:'Status masa penugasan',t:'s',f:r=>g(r,'statusmasapenugasan')}],charts('Jumlah KS Negeri Aktif'))},
+keb(){mount('keb',D.data.kebutuhan,COLS.keb,[{l:'Kecamatan',t:'s',f:kec},{l:'Jenjang',t:'s',f:jen}],charts('Sekolah dipimpin PLT',true))},
+pen(){const R=D.data.ksAktif.filter(r=>iso(PDT(r))>=M0()).sort((a,b)=>iso(PDT(a)).localeCompare(iso(PDT(b))));mount('pen',R,COLS.pen,[{l:'Jenjang',t:'s',f:jen,d:'SD'},{l:'Kecamatan',t:'s',f:kec}],heat)},
+bcks(){mount('bcks',D.data.bcks,COLS.bcks,[{l:'Nama lengkap',f:r=>g(r,'nama_lengkap')},{l:'Nama sekolah',f:r=>g(r,'nama_sekolah')},{l:'Kecamatan',t:'s',f:kec},{l:'Jenjang',t:'s',f:jen},{l:'Status kepegawaian',t:'s',f:r=>g(r,'status_kepegawaian')}],(R,box)=>{box.innerHTML='<div class="kp"><div class="card kc"><span>Guru memenuhi syarat BCKS</span><b>'+R.length+'</b></div></div>'})}};
+function show(v){cur=v;document.querySelectorAll('.v').forEach(e=>e.classList.toggle('on',e.id===v));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+$('#ttl').textContent=T[v][0];$('#sub').textContent=T[v][1];if(!done[v]){V[v]();done[v]=1}else if($('#'+v)._draw)$('#'+v)._draw();scrollTo(0,0);$('#sb').classList.remove('open');$('#ov').classList.remove('open')}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-v]');if(b)show(b.dataset.v)});
+$('#mb').onclick=()=>{$('#sb').classList.add('open');$('#ov').classList.add('open')};$('#ov').onclick=()=>{$('#sb').classList.remove('open');$('#ov').classList.remove('open')};
+$('#sw').onchange=e=>{SHOW=e.target.checked;const el=$('#'+cur);el._draw&&el._draw()};
+let TK=sessionStorage.getItem('sd_t')||'';
+function lgOut(m){TK='';sessionStorage.removeItem('sd_t');D=null;done={};Object.values(CH).forEach(c=>c.destroy());CH={};document.querySelectorAll('.v').forEach(e=>e.innerHTML='');document.body.classList.add('auth');$('#le').textContent=m||'';$('#lb').disabled=false;$('#lb').textContent='Masuk';$('#lp').value=''}
+function load(){const m=$('#msg');m.style.display='';m.textContent='Memuat data…';document.body.classList.remove('auth');
+api('getData',{token:TK}).then(r=>{
+if(!r.ok){if(r.code==='SESSION')lgOut('Sesi berakhir, silakan masuk kembali.');else m.textContent='Gagal memuat data: '+(r.msg||'');return}
+D=r.data;m.style.display='none';$('#un').textContent=D.user.nama;$('#ur').textContent=D.user.peran;show('home')
+}).catch(e=>{m.textContent='Gagal memuat data: '+e.message})}
+$('#lf').onsubmit=e=>{e.preventDefault();const b=$('#lb');b.disabled=true;b.textContent='Memeriksa…';$('#le').textContent='';
+api('login',{u:$('#lu').value,p:$('#lp').value}).then(r=>{if(r.ok){TK=r.token;sessionStorage.setItem('sd_t',TK);$('#lp').value='';load()}else{$('#le').textContent=r.msg||'Terjadi kesalahan, coba lagi.';b.disabled=false;b.textContent='Masuk'}}).catch(()=>{$('#le').textContent='Terjadi kesalahan, coba lagi.';b.disabled=false;b.textContent='Masuk'})};
+$('#ls').onclick=()=>{const p=$('#lp');p.type=p.type==='password'?'text':'password'};
+$('#lo').onclick=()=>{api('logout',{token:TK}).catch(()=>{});lgOut('')};
+if(TK)load();
+</script></body></html>
