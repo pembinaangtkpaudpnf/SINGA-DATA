@@ -46,7 +46,7 @@ body.auth aside,body.auth .wrap{display:none}#lg{display:none;min-height:100vh;a
 <main><div id="msg" class="card">Memuat data…</div><section id="home" class="v on"></section><section id="ks" class="v"></section><section id="keb" class="v"></section><section id="pen" class="v"></section><section id="bcks" class="v"></section></main></div>
 <script>
 /* GANTI dengan URL Web App (berakhiran /exec) dari Deploy > Manage deployments */
-const API_URL=https://script.google.com/macros/s/AKfycbzNY6rx2_WG2da4dFiQNYeXofkEHvMC9Vz7h_x-YXgfTOmO9SFznzXOM8FEjSnaPF9O/exec;
+const API_URL=https:'//script.google.com/macros/s/AKfycbzNY6rx2_WG2da4dFiQNYeXofkEHvMC9Vz7h_x-YXgfTOmO9SFznzXOM8FEjSnaPF9O/exec';
 const api=(action,p)=>fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(Object.assign({action},p||{}))}).then(r=>r.json());
 
 const $=s=>document.querySelector(s),K=n=>String(n).toLowerCase().replace(/[^a-z0-9]/g,'');
